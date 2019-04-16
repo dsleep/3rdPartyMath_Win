@@ -1,0 +1,21 @@
+[submodule "libxml2/source"]
+	path = libxml2/source
+	url = https://github.com/dsleep/libxml2.git
+[submodule "libiconv/source"]
+	path = libiconv/source
+	url = https://github.com/dsleep/libiconv.git
+[submodule "ceres/source"]
+	path = ceres/source
+	url = https://github.com/dsleep/ceres-solver.git
+[submodule "glog/source"]
+	path = glog/source
+	url = https://github.com/dsleep/glog.git
+[submodule "suitesparse/source"]
+	path = suitesparse/source
+	url = https://github.com/dsleep/suitesparse-metis-for-windows.git
+[submodule "eigen/source"]
+	path = eigen/source
+	url = https://github.com/dsleep/eigen-git-mirror.git
+[submodule "opencv/source"]
+	path = opencv/source
+	url = https://github.com/dsleep/opencv.git
