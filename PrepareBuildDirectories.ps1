@@ -46,3 +46,36 @@ foreach ($Version in $VersionArray)
 Write-Host "Please Select One:"
 
 $key = [Console]::ReadKey()
+
+Write-Host "Selected" $key.Value
+
+$SubModules = "eigen", "glog", "libiconv", "libxml2", "suitesparse", "opencv", "suitesparse"
+
+$3rdPartyPath = Resolve-Path -Path "..\3rdParty" 
+
+Write-Host "***** 3rd Party Path Installation Path: " $3rdPartyPath
+
+#"C:\Program Files\CMake\bin\cmake.exe" -G "Visual Studio 15 2017 Win64" -BbuildVS2017 -Hsource -DCMAKE_INSTALL_PREFIX="D:/SFM4S/3rdParty/glog" -DCMAKE_INSTALL_LIBDIR="lib/win64/vc15" 
+
+foreach ($SubModule in $SubModules)
+{
+	Write-Host "CREATING PROJECT FOR:" $SubModule
+	
+	Push-Location
+	Set-Location ./$SubModule
+		
+	$ModulePath = (Resolve-Path -Path ".").Path 
+	$ModulePath = $ModulePath + "\preparebuild.ps1"
+	
+	Write-Host "-> Running Script" $ModulePath
+	
+#	Start-Process -FilePath "C:\Program Files\CMake\bin\cmake.exe" -ArgumentList "/c dir `"%systemdrive%\program files`""
+	
+	#Invoke-Command -FilePath $ModulePath
+	#Invoke-Command -ComputerName . -FilePath "D:\SFM4S\3rdPartyMath_Win\eigen\preparebuild.ps1"
+
+	& $ModulePath 
+	
+	Pop-Location
+}
+
