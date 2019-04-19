@@ -1,13 +1,12 @@
 
 
-
+#Selection Arrays only 2015 & 2017
 $VersionArray = "14.0", "15.0"
 $ReadableVersion = "Visual Studio 14 2015 Win64", "Visual Studio 15 2017 Win64"
 $VSLibSubFolders = "vc14", "vc15"
 $VSBuildSubFolder = "buildVS2015", "buildVS2017"
 
-$FoundVS = New-Object System.Collections.Generic.List[System.Object]
-
+#need to find this path
 $CMakePath = "C:\Program Files\CMake\bin\cmake.exe"
 
 Write-Host "----------------------------------"
@@ -20,6 +19,7 @@ Write-Host "Listing Visual Studio Installs..."
 Write-Host "----------------------------------"
 
 
+$FoundVS = New-Object System.Collections.Generic.List[System.Object]
 $Iter = 0
 foreach ($Version in $VersionArray)
 {
@@ -73,6 +73,12 @@ Write-Host "CMake Build Ouput Folder: " $VSMakeBuildFolder
 #$SubModules = Get-ChildItem | ?{ $_.PSIsContainer } | % { $_.Name }
 $SubModules = "eigen", "glog", "libiconv", "libxml2", "opencv", "suitesparse", "ceres"
 
+#make 3rd party path
+$Verify3rdParty = "..\3rdParty"
+If(!(test-path $Verify3rdParty))
+{
+      New-Item -ItemType Directory -Force -Path $Verify3rdParty
+}
 $3rdPartyPath = (Resolve-Path -Path "..\3rdParty").Path
 $3rdPartyForwardPath = $3rdPartyPath -replace "\\", "/"
 
