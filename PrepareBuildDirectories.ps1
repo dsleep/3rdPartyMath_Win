@@ -3,6 +3,8 @@
 
 $VersionArray = "14.0", "15.0"
 $ReadableVersion = "Visual Studio 14 2015 Win64", "Visual Studio 15 2017 Win64"
+$VSLibSubFolders = "vc14", "vc15"
+$VSBuildSubFolder = "buildVS2015", "buildVS2017"
 
 $FoundVS = New-Object System.Collections.Generic.List[System.Object]
 
@@ -52,17 +54,27 @@ $key = [Console]::ReadKey()
 
 Write-Host "Selected" $key.Value
 
-$CMakeVSString = "Visual Studio 15 2017 Win64"
-$CMakeLibInstall = "lib/win64/vc15"
-$VSMakeBuildFolder = "buildVS2017"
-$VSBinPath = $FoundVS[([int]$key.Value) - 1] + "Common7\IDE\devenv.com"
+$SelectionIndex = ([int]$key.Value) - 1
+
+#kinda ugly using that readable string as the cmake vs arguemnt
+$CMakeVSString = $ReadableVersion[$SelectionIndex]
+$CMakeLibInstall = "lib/win64/" + $VSLibSubFolders[$SelectionIndex]
+$VSMakeBuildFolder = $VSBuildSubFolder[$SelectionIndex]
+$VSBinPath = $FoundVS[$SelectionIndex] + "Common7\IDE\devenv.com"
+
+Write-Host "=== VISUAL STUDIO BUILD INFO =====" $key.Value
+Write-Host "VS Exeuction Path:" $VSBinPath
+Write-Host "CMake VS Param:" $CMakeVSString
+Write-Host "CMake VS LibInstall Param:" $CMakeLibInstall
+Write-Host "CMake Build Ouput Folder: " $VSMakeBuildFolder
+
 
 #Could use Issues of build order though
 #$SubModules = Get-ChildItem | ?{ $_.PSIsContainer } | % { $_.Name }
-#$SubModules = "eigen", "glog", "libiconv", "libxml2", "opencv", "suitesparse", "ceres"
-$SubModules = "eigen", "glog", "libiconv", "libxml2", "opencv", "suitesparse"
+$SubModules = "eigen", "glog", "libiconv", "libxml2", "opencv", "suitesparse", "ceres"
 
 $3rdPartyPath = (Resolve-Path -Path "..\3rdParty").Path
+$3rdPartyForwardPath = $3rdPartyPath -replace "\\", "/"
 
 Write-Host "***** 3rd Party Path Installation Path: " $3rdPartyPath
 Write-Host "***** SubModules to build: " $SubModules
