@@ -2,9 +2,11 @@
 
 
 $VersionArray = "14.0", "15.0"
-$ReadableVersion = "2015", "2017"
+$ReadableVersion = "Visual Studio 14 2015 Win64", "Visual Studio 15 2017 Win64"
 
 $FoundVS = New-Object System.Collections.Generic.List[System.Object]
+
+$CMakePath = "C:\Program Files\CMake\bin\cmake.exe"
 
 Write-Host "----------------------------------"
 Write-Host "This Will Prepare the 3rd Party Build Directories"
@@ -14,6 +16,7 @@ Write-Host "----------------------------------"
 Write-Host "----------------------------------"
 Write-Host "Listing Visual Studio Installs..."
 Write-Host "----------------------------------"
+
 
 $Iter = 0
 foreach ($Version in $VersionArray)
@@ -49,13 +52,20 @@ $key = [Console]::ReadKey()
 
 Write-Host "Selected" $key.Value
 
-$SubModules = "eigen", "glog", "libiconv", "libxml2", "suitesparse", "opencv", "suitesparse"
+$CMakeVSString = "Visual Studio 15 2017 Win64"
+$CMakeLibInstall = "lib/win64/vc15"
+$VSMakeBuildFolder = "buildVS2017"
+$VSBinPath = $FoundVS[([int]$key.Value) - 1] + "Common7\IDE\devenv.com"
 
-$3rdPartyPath = Resolve-Path -Path "..\3rdParty" 
+#Could use Issues of build order though
+#$SubModules = Get-ChildItem | ?{ $_.PSIsContainer } | % { $_.Name }
+#$SubModules = "eigen", "glog", "libiconv", "libxml2", "opencv", "suitesparse", "ceres"
+$SubModules = "eigen", "glog", "libiconv", "libxml2", "opencv", "suitesparse"
+
+$3rdPartyPath = (Resolve-Path -Path "..\3rdParty").Path
 
 Write-Host "***** 3rd Party Path Installation Path: " $3rdPartyPath
-
-#"C:\Program Files\CMake\bin\cmake.exe" -G "Visual Studio 15 2017 Win64" -BbuildVS2017 -Hsource -DCMAKE_INSTALL_PREFIX="D:/SFM4S/3rdParty/glog" -DCMAKE_INSTALL_LIBDIR="lib/win64/vc15" 
+Write-Host "***** SubModules to build: " $SubModules
 
 foreach ($SubModule in $SubModules)
 {
@@ -63,18 +73,27 @@ foreach ($SubModule in $SubModules)
 	
 	Push-Location
 	Set-Location ./$SubModule
+	
+	$CurrentModule = $SubModule
 		
 	$ModulePath = (Resolve-Path -Path ".").Path 
 	$ModulePath = $ModulePath + "\preparebuild.ps1"
 	
-	Write-Host "-> Running Script" $ModulePath
-	
-#	Start-Process -FilePath "C:\Program Files\CMake\bin\cmake.exe" -ArgumentList "/c dir `"%systemdrive%\program files`""
-	
-	#Invoke-Command -FilePath $ModulePath
-	#Invoke-Command -ComputerName . -FilePath "D:\SFM4S\3rdPartyMath_Win\eigen\preparebuild.ps1"
+	Write-Host "-> Running Script" $ModulePath	
 
-	& $ModulePath 
+	Try
+	{
+		& $ModulePath 
+		
+		#build install solution
+		$SolutionName = (Get-ChildItem $VSMakeBuildFolder -Filter *.sln | Select-Object -First 1).Name
+		Write-Host "SOLUTION NAME: $VSMakeBuildFolder\$SolutionName" 
+		Start-Process $VSBinPath -ArgumentList "$VSMakeBuildFolder\$SolutionName /build Release /project INSTALL" -Wait
+	}
+	Catch [System.Management.Automation.CommandNotFoundException]
+	{
+		Write-Host "NO BUILD SCRIPT AT " + $ModulePath	
+	}
 	
 	Pop-Location
 }
