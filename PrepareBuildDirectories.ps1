@@ -37,24 +37,20 @@ foreach ($Version in $VersionArray)
 	if (!$VSCheck) 
 	{ 
 		#Write-Host "variable is null" 
+		$FoundVS.Add("NOT FOUND")
 	}
 	else
 	{
-		Write-Host ($Iter+1) ":Found Visual Studio" $ReadableVersion[$Iter] "AT" $VSCheck
-		
+		Write-Host ($Iter+1) ":Found Visual Studio" $ReadableVersion[$Iter] "AT" $VSCheck		
 		$FoundVS.Add($VSCheck)
 		$Iter++
 	}
 	
 }
 
-Write-Host "Please Select One:"
-
-$key = [Console]::ReadKey()
-
-Write-Host "Selected" $key.Value
-
-$SelectionIndex = ([int]$key.Value) - 1
+$key = Read-Host -Prompt 'Please Select One'
+$SelectionIndex = ([int]$key) - 1
+#Write-Host "Selected Index" $SelectionIndex
 
 #kinda ugly using that readable string as the cmake vs arguemnt
 $CMakeVSString = $ReadableVersion[$SelectionIndex]
@@ -72,6 +68,7 @@ Write-Host "CMake Build Ouput Folder: " $VSMakeBuildFolder
 #Could use Issues of build order though
 #$SubModules = Get-ChildItem | ?{ $_.PSIsContainer } | % { $_.Name }
 $SubModules = "eigen", "glog", "libiconv", "libxml2", "opencv", "suitesparse", "ceres"
+#$SubModules = ""
 
 #make 3rd party path
 $Verify3rdParty = "..\3rdParty"
