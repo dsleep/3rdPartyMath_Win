@@ -19,3 +19,6 @@
 [submodule "opencv/source"]
 	path = opencv/source
 	url = https://github.com/dsleep/opencv.git
+[submodule "gflags/source"]
+	path = gflags/source
+	url = https://github.com/dsleep/gflags.git
