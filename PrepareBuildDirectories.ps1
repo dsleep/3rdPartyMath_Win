@@ -67,8 +67,8 @@ Write-Host "CMake Build Ouput Folder: " $VSMakeBuildFolder
 
 #Could use Issues of build order though
 #$SubModules = Get-ChildItem | ?{ $_.PSIsContainer } | % { $_.Name }
-#$SubModules = "eigen", "gflags", "glog", "libiconv", "libxml2", "opencv", "suitesparse", "ceres"
-$SubModules = "glog"
+$SubModules = "eigen", "gflags", "glog", "libiconv", "libxml2", "opencv", "suitesparse", "ceres"
+#$SubModules = "glog"
 
 #make 3rd party path
 $Verify3rdParty = "..\3rdParty"
