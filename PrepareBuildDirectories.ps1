@@ -9,6 +9,16 @@ $VSBuildSubFolder = "buildVS2015", "buildVS2017"
 #need to find this path
 $CMakePath = "C:\Program Files\CMake\bin\cmake.exe"
 
+If(!(test-path $CMakePath -PathType Leaf))
+{
+	Write-Host "Could not find cmake please update CMakePath in PrepareBuildDirectories.ps1"
+	Exit
+}
+else
+{
+	Write-Host "Found CMake"
+}
+
 Write-Host "----------------------------------"
 Write-Host "This Will Prepare the 3rd Party Build Directories"
 Write-Host "Based on the desired Visual Studio Version you have"
