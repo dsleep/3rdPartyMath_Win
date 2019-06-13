@@ -46,8 +46,9 @@ foreach ($Version in $VersionArray)
 	
 	if (!$VSCheck) 
 	{ 
-		#Write-Host "variable is null" 
+		Write-Host ($Iter+1) ":Did not find" $ReadableVersion[$Iter] 
 		$FoundVS.Add("NOT FOUND")
+		$Iter++
 	}
 	else
 	{
