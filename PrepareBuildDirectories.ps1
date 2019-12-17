@@ -1,10 +1,10 @@
 
 
-#Selection Arrays only 2015 & 2017
-$VersionArray = "14.0", "15.0"
-$ReadableVersion = "Visual Studio 14 2015 Win64", "Visual Studio 15 2017 Win64"
-$VSLibSubFolders = "vc14", "vc15"
-$VSBuildSubFolder = "buildVS2015", "buildVS2017"
+#Selection Arrays only 2015, 2017, 2019
+$VersionArray = "14.0", "15.0", "16.0"
+$ReadableVersion = "Visual Studio 14 2015 Win64", "Visual Studio 15 2017 Win64", "Visual Studio 16 2019`"`" -A x64"
+$VSLibSubFolders = "vc14", "vc15", "vc16"
+$VSBuildSubFolder = "buildVS2015", "buildVS2017", "buildVS2019"
 
 #need to find this path
 $CMakePath = "C:\Program Files\CMake\bin\cmake.exe"
@@ -44,7 +44,7 @@ foreach ($Version in $VersionArray)
 		#Write-Host "Registry Key Property missing" 
 	}
 	
-	if (!$VSCheck) 
+	if ( !$VSCheck) 
 	{ 
 		Write-Host ($Iter+1) ":Did not find" $ReadableVersion[$Iter] 
 		$FoundVS.Add("NOT FOUND")
