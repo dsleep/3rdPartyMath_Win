@@ -22,3 +22,6 @@
 [submodule "gflags/source"]
 	path = gflags/source
 	url = https://github.com/dsleep/gflags.git
+[submodule "libjpeg-turbo/source"]
+	path = libjpeg-turbo/source
+	url = https://github.com/dsleep/libjpeg-turbo.git
