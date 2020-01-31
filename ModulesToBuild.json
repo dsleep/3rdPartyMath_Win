@@ -1,0 +1,49 @@
+{
+	"modules": [	
+		{
+			"ModuleName": "eigen",
+			"LocalPath": "eigen",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TESTING=false"
+		},
+		{
+			"ModuleName": "gflags",
+			"LocalPath": "gflags",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DLIB_INSTALL_DIR=\"$CMakeLibInstall\" "
+		},
+		{
+			"ModuleName": "glog",
+			"LocalPath": "glog",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TESTING=False "
+		},
+		{
+			"ModuleName": "libiconv",
+			"LocalPath": "libiconv",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" " 
+		},
+		{
+			"ModuleName": "libjpeg-turbo",
+			"LocalPath": "libjpeg-turbo",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLocalLibInstall\" "
+		},
+		{
+			"ModuleName": "libxml2",
+			"LocalPath": "libxml2",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_INCLUDEDIR=\"$OutputPath/include\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DLIBICONV_INCLUDE_DIR=\"$3rdPartyForwardPath/libiconv/include\" -DLIBICONV_LIBRARY=\"$3rdPartyForwardPath/libiconv/$CMakeLibInstall\" "
+		},
+		{
+			"ModuleName": "opencv",
+			"LocalPath": "opencv",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TESTS=false -DBUILD_PERF_TESTS=false "
+		},
+		{
+			"ModuleName": "suitesparse",
+			"LocalPath": "suitesparse",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_METIS=false"
+		},
+		{
+			"ModuleName": "ceres",
+			"LocalPath": "ceres",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_EXAMPLES=false -DGFLAGS=true -DBUILD_TESTING=false -DSUITESPARSE=true -DSuiteSparse_DIR=\"$3rdPartyForwardPath/suitesparse\" -DGLOG_INCLUDE_DIR_HINTS=\"$3rdPartyForwardPath/glog/include\" -DGLOG_LIBRARY_DIR_HINTS=\"$3rdPartyForwardPath/glog/$CMakeLibInstall\" -DEigen3_DIR=\"$3rdPartyForwardPath/eigen\" -DGFLAGS_INCLUDE_DIR_HINTS=\"$3rdPartyForwardPath/gflags/include\" -DGFLAGS_LIBRARY_DIR_HINTS=\"$3rdPartyForwardPath/gflags/$CMakeLibInstall\" "
+		}
+	]
+}
