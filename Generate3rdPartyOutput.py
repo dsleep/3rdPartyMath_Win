@@ -66,8 +66,8 @@ def RunAndWait(ProgramLaunch):
 
 def DownloadFromS3(URL, file_name):
 
-	ACCESS_KEY = 'AKIAQPDYDEOB3AUKT3OO'
-	SECRET_KEY = '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' 
+	ACCESS_KEY = 'ACCESS_KEY'
+	SECRET_KEY = 'SECRET_KEY'
 
 	with open(file_name, "wb") as f:
 		print("Downloading %s" %(URL))
@@ -127,10 +127,7 @@ if which("node.exe") == None:
 
 VSVersions = [ "15.0", "16.0" ]
 VSBuildS = [ "-G \"Visual Studio 15 2017 Win64\"", "-G \"Visual Studio 16 2019\" -A x64" ]
-
-
 VSInstallMap = get_VS_installs()
-
 		
 print("Which Visual Studio?");
 print("[1] 2017");
@@ -139,14 +136,10 @@ VSVersion = int(input('[1-2]?'))
 ActiveZip = None
 DeleteExisting = False
 
-#kinda ugly using that readable string as the cmake vs arguemnt
-# $VSBinPath = $FoundVS[$SelectionIndex] + "Common7\IDE\devenv.com"
-
 CMakeVSString = None
 CMakeLibInstall = None
 VSMakeBuildFolder = None
 VSBinPath = None
-
 		
 if VSVersion == 1:	
 	CMakeVSString = "Visual Studio 15 2017 Win64"
@@ -204,46 +197,4 @@ with open('ModulesToBuild.json') as json_file:
 		os.chdir("../")
 		print('')
 
-print("Checking 3rd Party Directory...")
-
-# if os.path.exists("../3rdParty"):
-	# print("3rd Party Exists")
-	# YesNo = input('Delete exisitng (y/n)?')
-	# if YesNo == 'y' or YesNo == 'Y':
-		# DeleteExisting = True
-# else:
-	# DeleteExisting = True
-
-# if DeleteExisting:
-	# print("Preparing 3rd Party")
-	
-	# # Downloading a file
-	# if VSVersion == 1:
-		# DownloadFromS3("https://sleepingrobot-storage.s3.amazonaws.com/3rdParty_VS2017.zip", "3rdParty_VS2017.zip")
-		# ActiveZip = "3rdParty_VS2017.zip"
-	# if VSVersion == 2:
-		# DownloadFromS3("https://sleepingrobot-storage.s3.amazonaws.com/3rdParty_VS2019.zip", "3rdParty_VS2019.zip")
-		# ActiveZip = "3rdParty_VS2019.zip"
-	
-	# # Create a ZipFile Object and load sample.zip in it
-	# if ActiveZip != None:
-		# with ZipFile(ActiveZip, 'r') as zipObj:
-			# zipObj.extractall('.')	 	
-
-# not needed
-# print(RunAndWait("git.exe clone https://github.com/dsleep/3rdPartyMath_Win.git --recursive"))
-#print(RunAndWait("svn.exe checkout https://216.31.112.136/svn/RedRiverDrone/trunk RedRiverDrone/src"))
-
-
-# Start-Process $CMakePath -ArgumentList "-G `"$CMakeVSString`" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=`"$OutputPath`" -DCMAKE_INSTALL_LIBDIR=`"$CMakeLibInstall`" -DBUILD_METIS=false" -Wait
-
-#Write-Host "SOLUTION NAME: $VSMakeBuildFolder\$SolutionName" 
-#		Start-Process $VSBinPath -ArgumentList "$VSMakeBuildFolder\$SolutionName /build Release /project INSTALL" -Wait
-
-# print(RunAndWait("svn.exe checkout https://216.31.112.136/svn/QExperiments/trunk/Intelliflow_CesiumJS/trunk Intelliflow_CesiumJS"))
-# print(RunAndWait("svn.exe checkout https://216.31.112.136/svn/IntelliFlow/trunk IntelliFlow/src"))print(RunAndWait("svn.exe checkout https://216.31.112.136/svn/IntelliFlow/trunk IntelliFlow/src"))
-
-#need to find this path...
-
-#RunAndWait("\"{}\" {} -BSuiteBuild".format(CMakePath, VSBuildS[VSVersion-1] ))
 
