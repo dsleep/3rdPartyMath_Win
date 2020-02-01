@@ -59,6 +59,11 @@
 			"ModuleName": "flann",
 			"LocalPath": "flann",
 			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TESTS=false -DBUILD_EXAMPLES=false -DLZ4_INCLUDE_DIR=\"$3rdPartyForwardPath/lz4/include\" -DLZ4_LIBRARY=\"$3rdPartyForwardPath/lz4/$CMakeLibInstall\" -DBUILD_PYTHON_BINDINGS=false -DBUILD_MATLAB_BINDINGS=false" 
+		},
+		{
+			"ModuleName": "VTK",
+			"LocalPath": "VTK",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DVTK_BUILD_TESTING=OFF" 
 		}
 	]
 }
