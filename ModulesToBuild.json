@@ -44,6 +44,21 @@
 			"ModuleName": "ceres",
 			"LocalPath": "ceres",
 			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_EXAMPLES=false -DGFLAGS=true -DBUILD_TESTING=false -DSUITESPARSE=true -DSuiteSparse_DIR=\"$3rdPartyForwardPath/suitesparse\" -DGLOG_INCLUDE_DIR_HINTS=\"$3rdPartyForwardPath/glog/include\" -DGLOG_LIBRARY_DIR_HINTS=\"$3rdPartyForwardPath/glog/$CMakeLibInstall\" -DEigen3_DIR=\"$3rdPartyForwardPath/eigen\" -DGFLAGS_INCLUDE_DIR_HINTS=\"$3rdPartyForwardPath/gflags/include\" -DGFLAGS_LIBRARY_DIR_HINTS=\"$3rdPartyForwardPath/gflags/$CMakeLibInstall\" "
+		},	
+		{
+			"ModuleName": "lz4",
+			"LocalPath": "lz4",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TOOLS=false" 
+		},
+		{
+			"ModuleName": "qhull",
+			"LocalPath": "qhull",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DLIB_INSTALL_DIR=\"$CMakeLibInstall\" " 
+		},
+		{
+			"ModuleName": "flann",
+			"LocalPath": "flann",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TESTS=false -DBUILD_EXAMPLES=false -DLZ4_INCLUDE_DIR=\"$3rdPartyForwardPath/lz4/include\" -DLZ4_LIBRARY=\"$3rdPartyForwardPath/lz4/$CMakeLibInstall\" -DBUILD_PYTHON_BINDINGS=false -DBUILD_MATLAB_BINDINGS=false" 
 		}
 	]
 }

@@ -25,3 +25,24 @@
 [submodule "libjpeg-turbo/source"]
 	path = libjpeg-turbo/source
 	url = https://github.com/dsleep/libjpeg-turbo.git
+[submodule "hdf5/source"]
+	path = hdf5/source
+	url = https://github.com/dsleep/hdf5.git
+[submodule "pcl/source"]
+	path = pcl/source
+	url = https://github.com/dsleep/pcl.git
+[submodule "VTK/source"]
+	path = VTK/source
+	url = https://github.com/dsleep/VTK.git
+[submodule "flann/source"]
+	path = flann/source
+	url = https://github.com/dsleep/flann.git
+[submodule "qhull/source"]
+	path = qhull/source
+	url = https://github.com/dsleep/qhull.git
+[submodule "pkgconf/source"]
+	path = pkgconf/source
+	url = https://github.com/dsleep/pkgconf.git
+[submodule "lz4/source"]
+	path = lz4/source
+	url = https://github.com/dsleep/lz4.git
