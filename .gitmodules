@@ -46,3 +46,6 @@
 [submodule "lz4/source"]
 	path = lz4/source
 	url = https://github.com/dsleep/lz4.git
+[submodule "googletest/source"]
+	path = googletest/source
+	url = https://github.com/dsleep/googletest.git
