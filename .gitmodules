@@ -49,3 +49,4 @@
 [submodule "lz4/source"]
 	path = lz4/source
 	url = https://github.com/dsleep/lz4.git
+	branch = dev
