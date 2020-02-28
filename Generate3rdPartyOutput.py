@@ -152,7 +152,7 @@ if VSVersion == 2:
 
 VSBinPath = "\"" + VSInstallMap[ VSVersions[VSVersion - 1 ] ] + "Common7\IDE\devenv.com" + "\""
 CMakePath = "\"C:\\Program Files\\CMake\\bin\\cmake.exe\""
-ThirdPartyPath = os.path.abspath( "..\\3rdParty")
+ThirdPartyPath = os.path.abspath( "..\\")
 ThirdPartyForwardPath = ThirdPartyPath.replace( "\\", "/" )
 
 print("CMakePath: " + CMakePath)
