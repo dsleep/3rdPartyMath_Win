@@ -52,8 +52,14 @@ def which(program):
 
     return None
 	
-def RunAndWait(ProgramLaunch):
+def RunAndWait(ProgramLaunch, LogName=''):
 	print("Running {}...".format(ProgramLaunch))
+	
+	LogFile = None
+	
+	if LogName != '':
+		LogFile = open(LogName + ".log.txt","w")
+	
 	process = subprocess.Popen(ProgramLaunch, bufsize=2048, shell=True, stdout=subprocess.PIPE, encoding='utf8', close_fds=True)
 	while True:
 		output = process.stdout.readline()
@@ -61,7 +67,13 @@ def RunAndWait(ProgramLaunch):
 			break
 		if output:
 			print(output, end = '')
+			if LogFile:
+				LogFile.write(output)
 	rc = process.poll()
+	
+	if LogFile:
+		LogFile.close()
+		
 	return "DONE"	
 
 def DownloadFromS3(URL, file_name):
@@ -154,6 +166,7 @@ VSBinPath = "\"" + VSInstallMap[ VSVersions[VSVersion - 1 ] ] + "Common7\IDE\dev
 CMakePath = "\"C:\\Program Files\\CMake\\bin\\cmake.exe\""
 ThirdPartyPath = os.path.abspath( "..\\")
 ThirdPartyForwardPath = ThirdPartyPath.replace( "\\", "/" )
+ScriptPath = get_script_path()
 
 print("CMakePath: " + CMakePath)
 print("ThirdPartyPath: " + ThirdPartyPath)
@@ -174,7 +187,7 @@ with open('ModulesToBuild.json') as json_file:
 		OutputPath = ThirdPartyPath + "/" + p['LocalPath']
 		CMakeLocalLibInstall = OutputPath + "\\" + CMakeLibInstall
 		
-		LocalCMakeArgs = p['CMakeArgs']
+		LocalCMakeArgs = p['CMakeArgs'] + " -DThirdPartyPath:PATH=\"" + ThirdPartyPath + "\" -C \"" + ScriptPath + "/CMakeCachePreload.cmake \""
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$CMakeVSString", CMakeVSString )
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$VSMakeBuildFolder", VSMakeBuildFolder )
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$OutputPath", OutputPath )
@@ -182,17 +195,18 @@ with open('ModulesToBuild.json') as json_file:
 		LocalCMakeArgs = LocalCMakeArgs.replace( "\\", "/" )
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$3rdPartyForwardPath", ThirdPartyForwardPath )
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$CMakeLocalLibInstall", CMakeLocalLibInstall )
+		
 	
 		ExecutionString = CMakePath + " " + LocalCMakeArgs
 		print("CMAKE CALL: " + ExecutionString)
-		RunAndWait(ExecutionString)
+		RunAndWait(ExecutionString, "../" + p['ModuleName'] + "_CMAKE" )
 		
 		SolutionName = None
 		SolutionName = glob.glob("./" + VSMakeBuildFolder + "/*.sln")[0]
 		
 		VSExecutionString = VSBinPath + " " + SolutionName + " /build Release /project INSTALL"
 		print("VS CALL: " + VSExecutionString) 
-		RunAndWait(VSExecutionString)
+		RunAndWait(VSExecutionString, "../" + p['ModuleName'] + "_BUILD" )
 		
 		os.chdir("../")
 		print('')
