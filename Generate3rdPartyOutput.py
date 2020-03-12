@@ -74,6 +74,8 @@ def RunAndWait(ProgramLaunch, LogName=''):
 	if LogFile:
 		LogFile.close()
 		
+	#print("ERROR CODE" + process.returncode) //// hmmm
+	
 	return "DONE"	
 
 def DownloadFromS3(URL, file_name):
