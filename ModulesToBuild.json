@@ -51,7 +51,7 @@
 			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TOOLS=false" 
 		}
 	],
-	"SKIPTHESEHACK": [
+	"devmodules": [
 		{
 			"ModuleName": "qhull",
 			"LocalPath": "qhull",

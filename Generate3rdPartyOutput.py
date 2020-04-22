@@ -9,7 +9,23 @@ import requests
 import glob
 from awsauth import S3Auth
 
+import argparse
+
 from winreg import *
+
+def str2bool(v):
+	if isinstance(v, bool):
+		return v
+	if v.lower() in ('yes', 'true', 't', 'y', '1'):
+		return True
+	elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+		return False
+	else:
+		raise argparse.ArgumentTypeError('Boolean value expected.')
+		
+parser = argparse.ArgumentParser(description='Generate 3rd Party!')
+parser.add_argument("--dev", type=str2bool, nargs='?', const=True, default=False, help="Use Dev")
+args = parser.parse_args()
 
 def get_VS_installs():
 	VSInstalls = dict()
@@ -166,7 +182,7 @@ if VSVersion == 2:
 
 VSBinPath = "\"" + VSInstallMap[ VSVersions[VSVersion - 1 ] ] + "Common7\IDE\devenv.com" + "\""
 CMakePath = "\"C:\\Program Files\\CMake\\bin\\cmake.exe\""
-ThirdPartyPath = os.path.abspath( "..\\")
+ThirdPartyPath = os.path.abspath( "..\\3rdParty")
 ThirdPartyForwardPath = ThirdPartyPath.replace( "\\", "/" )
 ScriptPath = get_script_path()
 
@@ -176,10 +192,14 @@ print("VSBinPath: " + VSBinPath)
 
 with open('ModulesToBuild.json') as json_file:
 	data = json.load(json_file)
+	
+	if(args.dev):
+		data['modules'] = data['modules'] + data['devmodules'] 
+	
 	for p in data['modules']:
 		print('ModuleName: ' + p['ModuleName'])
-		#print('LocalPath: ' + p['LocalPath'])
-		#print('CMakeArgs: ' + p['CMakeArgs'])
+		print('LocalPath: ' + p['LocalPath'])
+		print('CMakeArgs: ' + p['CMakeArgs'])
 		print('')
 		
 		print(os.getcwd())
