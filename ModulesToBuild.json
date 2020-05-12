@@ -49,6 +49,11 @@
 			"ModuleName": "lz4",
 			"LocalPath": "lz4",
 			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TOOLS=false" 
+		},	
+		{
+			"ModuleName": "jsoncpp",
+			"LocalPath": "jsoncpp",
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TOOLS=false" 
 		}
 	],
 	"devmodules": [
