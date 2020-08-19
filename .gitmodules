@@ -53,3 +53,6 @@
 [submodule "jsoncpp/source"]
 	path = jsoncpp/source
 	url = https://github.com/dsleep/jsoncpp.git
+[submodule "opencv_contrib"]
+	path = opencv_contrib
+	url = https://github.com/dsleep/opencv_contrib.git
