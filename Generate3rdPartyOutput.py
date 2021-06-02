@@ -185,10 +185,14 @@ CMakePath = "\"C:\\Program Files\\CMake\\bin\\cmake.exe\""
 ThirdPartyPath = os.path.abspath( "..\\3rdParty")
 ThirdPartyForwardPath = ThirdPartyPath.replace( "\\", "/" )
 ScriptPath = get_script_path()
+GitRootDirectory = os.getcwd()
 
 print("CMakePath: " + CMakePath)
 print("ThirdPartyPath: " + ThirdPartyPath)
 print("VSBinPath: " + VSBinPath)
+print("GitRootDirectory: " + GitRootDirectory)
+
+
 
 with open('ModulesToBuild.json') as json_file:
 	data = json.load(json_file)
@@ -211,6 +215,7 @@ with open('ModulesToBuild.json') as json_file:
 		
 		LocalCMakeArgs = p['CMakeArgs'] + " -DThirdPartyPath:PATH=\"" + ThirdPartyPath + "\" -C \"" + ScriptPath + "/CMakeCachePreload.cmake \""
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$CMakeVSString", CMakeVSString )
+		LocalCMakeArgs = LocalCMakeArgs.replace( "$GitRootDirectory", GitRootDirectory )
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$VSMakeBuildFolder", VSMakeBuildFolder )
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$OutputPath", OutputPath )
 		LocalCMakeArgs = LocalCMakeArgs.replace( "$CMakeLibInstall", CMakeLibInstall )

@@ -33,7 +33,7 @@
 		{
 			"ModuleName": "opencv",
 			"LocalPath": "opencv",
-			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TESTS=false -DBUILD_PERF_TESTS=false -DWITH_QT=true -DWITH_OPENGL=true "
+			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DBUILD_TESTS=false -DBUILD_PERF_TESTS=false -DWITH_QT=true -DWITH_OPENGL=true -DOPENCV_EXTRA_MODULES_PATH=\"$3rdPartyForwardPath/opencv_contrib/modules\" "
 		},
 		{
 			"ModuleName": "suitesparse",
@@ -76,6 +76,6 @@
 			"ModuleName": "pcl",
 			"LocalPath": "pcl",
 			"CMakeArgs": "-G \"$CMakeVSString\" -B$VSMakeBuildFolder -Hsource -DCMAKE_INSTALL_PREFIX=\"$OutputPath\" -DCMAKE_INSTALL_LIBDIR=\"$CMakeLibInstall\" -DPCL_SHARED_LIBS=TRUE -DPCL_BUILD_WITH_BOOST_DYNAMIC_LINKING_WIN32=TRUE -DBUILD_EXAMPLES=FALSE -DWITH_QHULL=TRUE -Dflann_DIR=\"$3rdPartyForwardPath/flann/lib/cmake/flann\" -DEIGEN_INCLUDE_DIR=\"$3rdPartyForwardPath/eigen/include/eigen3\" -DWITH_VTK=TRUE -DVTK_DIR=\"$3rdPartyForwardPath/VTK/lib/win64/vc15/cmake/vtk-8.90\" -DGLEW_INCLUDE_DIR=\"$3rdPartyForwardPath/glew/include\" -DGLEW_LIBRARY_RELEASE=\"$3rdPartyForwardPath/glew/lib/Release/x64/glew32s.lib\" -DGLEW_LIBRARY_DEBUG=\"$3rdPartyForwardPath/glew/lib/Release/x64/glew32s.lib\" -DThirdPartyRootDir=\"$3rdPartyForwardPath\" -DLIB_POST_FIX=\"$CMakeLibInstall\" -DBUILD_apps=TRUE -DBUILD_apps_point_cloud_editor=TRUE -DBUILD_apps_cloud_composer=TRUE -DBUILD_visualization=TRUE" 
-		} 	
+		}	
 	]
 }
